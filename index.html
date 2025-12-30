@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Portfolio</title>
+    <style>
+        /* ============================================
+           VARIABLES CSS - Modifier ici pour tout changer
+           ============================================ */
+        :root {
+            --color-primary: #4169E1;
+            --color-bg-light: #ffffff;
+            --color-bg-dark: #f5f5f5;
+            --color-text: #333;
+            --color-text-light: #666;
+            --font-main: 'Courier New', Courier, monospace;
+            --spacing-small: 10px;
+            --spacing-medium: 20px;
+            --spacing-large: 40px;
+            --max-width: 1200px;
+        }
+
+        /* ============================================
+           RESET & BASE
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: var(--font-main);
+            color: var(--color-text);
+            background: linear-gradient(to bottom, var(--color-bg-light), var(--color-bg-dark));
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* ============================================
+           COMPOSANT: HEADER / NAVIGATION
+           ============================================ */
+        .header {
+            background: var(--color-bg-light);
+            padding: var(--spacing-medium) var(--spacing-large);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: var(--spacing-medium);
+        }
+
+        .nav-menu a {
+            color: var(--color-text);
+            text-decoration: none;
+            padding: var(--spacing-small);
+            transition: all 0.3s;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: var(--color-primary);
+            border-bottom-color: var(--color-primary);
+        }
+
+        /* ============================================
+           COMPOSANT: CONTAINER PRINCIPAL
+           ============================================ */
+        .main-container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-large);
+        }
+
+        /* ============================================
+           COMPOSANT: SECTION
+           ============================================ */
+        .section {
+            margin-bottom: var(--spacing-large);
+        }
+
+        .section-title {
+            font-size: 28px;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-medium);
+            border-bottom: 2px solid var(--color-primary);
+            padding-bottom: var(--spacing-small);
+        }
+
+        /* ============================================
+           COMPOSANT: CARD (réutilisable)
+           ============================================ */
+        .card {
+            background: var(--color-bg-light);
+            border-radius: 8px;
+            padding: var(--spacing-medium);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: var(--spacing-medium);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .card-title {
+            font-size: 20px;
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-small);
+        }
+
+        .card-description {
+            color: var(--color-text-light);
+            margin-bottom: var(--spacing-small);
+        }
+
+        /* ============================================
+           COMPOSANT: GRID (pour galeries)
+           ============================================ */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--spacing-medium);
+        }
+
+        /* ============================================
+           COMPOSANT: BOUTON
+           ============================================ */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-small) var(--spacing-medium);
+            background: var(--color-primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: opacity 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: var(--font-main);
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        /* ============================================
+           COMPOSANT: FOOTER
+           ============================================ */
+        .footer {
+            background: var(--color-bg-light);
+            padding: var(--spacing-large);
+            margin-top: var(--spacing-large);
+            text-align: center;
+            color: var(--color-text-light);
+            border-top: 2px solid var(--color-bg-dark);
+        }
+
+        /* ============================================
+           RESPONSIVE
+           ============================================ */
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                gap: var(--spacing-small);
+            }
+
+            .nav-container {
+                flex-direction: column;
+                gap: var(--spacing-medium);
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         HEADER / NAVIGATION (composant réutilisable)
+         ============================================ -->
+    <header class="header">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Mon Portfolio</a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li><a href="projets.html">Projets</a></li>
+                    <li><a href="jeux.html">Jeux</a></li>
+                    <li><a href="musique.html">Musique</a></li>
+                    <li><a href="videos.html">Vidéos</a></li>
+                    <li><a href="about.html">À propos</a></li>
+                    <li><a href="liens.html">Liens</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ============================================
+         CONTENU PRINCIPAL
+         ============================================ -->
+    <main class="main-container">
+        <!-- Section d'accueil -->
+        <section class="section">
+            <h1 class="section-title">Bienvenue</h1>
+            <div class="card">
+                <p>
+                    Amateur passionné d'illustration, modélisation, animation, musique et programmation.
+                    Explorez mes créations et projets !
+                </p>
+            </div>
+        </section>
+
+        <!-- Grid de projets récents -->
+        <section class="section">
+            <h2 class="section-title">Projets récents</h2>
+            <div class="grid">
+                <!-- Card exemple 1 -->
+                <div class="card">
+                    <h3 class="card-title">Mon Jeu Godot</h3>
+                    <p class="card-description">
+                        Un jeu en développement avec Godot 4.5
+                    </p>
+                    <a href="jeux.html" class="btn">Voir le jeu</a>
+                </div>
+
+                <!-- Card exemple 2 -->
+                <div class="card">
+                    <h3 class="card-title">Dernières Compositions</h3>
+                    <p class="card-description">
+                        Mes créations musicales sur SoundCloud
+                    </p>
+                    <a href="musique.html" class="btn">Écouter</a>
+                </div>
+
+                <!-- Card exemple 3 -->
+                <div class="card">
+                    <h3 class="card-title">Animations & Vidéos</h3>
+                    <p class="card-description">
+                        Clips et animations sur YouTube/Vimeo
+                    </p>
+                    <a href="videos.html" class="btn">Regarder</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ============================================
+         FOOTER (composant réutilisable)
+         ============================================ -->
+    <footer class="footer">
+        <p>&copy; 2024 Mon Portfolio - Créé avec passion</p>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT (si nécessaire plus tard)
+         ============================================ -->
+    <script>
+        // Gestion de la navigation active
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            if (link.getAttribute('href') === currentPage) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    </script>
+</body>
+</html>
